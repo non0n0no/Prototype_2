@@ -8,10 +8,13 @@ public class PlayerController : MonoBehaviour
     public float xRange = 10f;
     [SerializeField] private float speed;
 
+    [SerializeField] private GameObject projectilePrefab;
+
     // Update is called once per frame
     void Update()
     {
         Movimento();
+        AtirarComida();
         Bounds();
     }
 
@@ -19,6 +22,14 @@ public class PlayerController : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+    }
+
+    void AtirarComida()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+        }
     }
 
     void Bounds()
